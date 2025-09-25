@@ -1,0 +1,4 @@
+[submodule "servletMinimal"]
+	path = servletMinimal
+	url = https://github.com/SalesianosZaragoza/servletMinimal.git
+  branch = main

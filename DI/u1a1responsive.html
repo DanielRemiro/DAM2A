@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Layout Responsivo</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .header { background:#0a0f1f; color:#fff; text-align:center; padding:20px; }
+    .menu { background:red; color:#fff; text-align:center; padding:20px; }
+    .hero { background:#428bca; color:#fff; text-align:center; padding:20px; }
+    .main { background:#1b2a41; color:#fff; text-align:center; padding:20px; }
+    .banner { background:yellow; color:#000; text-align:center; padding:20px; }
+    .extra { background:green; color:#fff; text-align:center; padding:20px; }
+    .image { background:blue; color:#fff; text-align:center; padding:20px; }
+  </style>
+</head>
+<body>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 col-md-12 col-lg-2 header">HEADER</div>
+      <div class="col-12 col-md-3 col-lg-10 menu">MENU</div>
+      <div class="col-12 hero">HERO</div>
+
+      <div class="col-12 col-md-9 col-lg-6 main">MAIN</div>
+      <div class="col-12 col-md-9 col-lg-12 banner">BANNER</div>
+
+      <!-- versión para desktop: columna a la derecha (stack vertical: IMAGE encima de EXTRA) -->
+      <div class="col-12 col-lg-3 d-none d-lg-block">
+        <div class="row">
+          <div class="col-12 image">IMAGE</div>
+          <div class="col-12 extra">EXTRA</div>
+        </div>
+      </div>
+
+      <!-- versión para tablet (md): aparece alineado bajo MAIN usando offset (visible solo en md, oculto en lg) -->
+      <div class="row d-none d-md-flex d-lg-none w-100">
+        <div class="col-md-3"></div>
+        <div class="col-12 col-md-6 extra">EXTRA</div>
+        <div class="col-12 col-md-3 image">IMAGE</div>
+      </div>
+
+      <!-- versión móvil (xs): EXTRA e IMAGE en columna (visible solo en <md) -->
+      <div class="col-12 d-md-none extra">EXTRA</div>
+      <div class="col-12 d-md-none image">IMAGE</div>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
