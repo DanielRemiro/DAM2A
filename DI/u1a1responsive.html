@@ -1,52 +1,98 @@
 <!DOCTYPE html>
-<html lang="es-ES">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Layout Responsivo</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    .header { background:#0a0f1f; color:#fff; text-align:center; padding:20px; }
-    .menu { background:red; color:#fff; text-align:center; padding:20px; }
-    .hero { background:#428bca; color:#fff; text-align:center; padding:20px; }
-    .main { background:#1b2a41; color:#fff; text-align:center; padding:20px; }
-    .banner { background:yellow; color:#000; text-align:center; padding:20px; }
-    .extra { background:green; color:#fff; text-align:center; padding:20px; }
-    .image { background:blue; color:#fff; text-align:center; padding:20px; }
-  </style>
-</head>
-<body>
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-12 col-md-12 col-lg-2 header">HEADER</div>
-      <div class="col-12 col-md-3 col-lg-10 menu">MENU</div>
-      <div class="col-12 hero">HERO</div>
+<html lang="en">
 
-      <div class="col-12 col-md-9 col-lg-6 main">MAIN</div>
-      <div class="col-12 col-md-9 col-lg-12 banner">BANNER</div>
+    <head>
 
-      <!-- versión para desktop: columna a la derecha (stack vertical: IMAGE encima de EXTRA) -->
-      <div class="col-12 col-lg-3 d-none d-lg-block">
-        <div class="row">
-          <div class="col-12 image">IMAGE</div>
-          <div class="col-12 extra">EXTRA</div>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" >
+
+        <style>
+
+            *{text-align: center;}
+            .header{color:white;background-color: #0d1b2a;}
+            .menu{color:white;background-color: #e63946;}
+            .hero{color:white;background-color:#457b9d ;}
+            .main{color:white;background-color: #1d3557;}
+            .banner{color:white;background-color:#f1c40f ;}
+            .extra{color:white;background-color: #2a9d8f;}
+            .image{color:white;background-color: #a8dadc;}
+
+        </style>
+
+    </head>
+
+    <body>
+
+        <div class="container-fluid">
+
+            <!-- HEADER Y MENU(PARA SM Y LG)-->
+            <div class="row order-sm-1 col-lg-12 ">
+
+                <div class="col-sm-12 col-lg-3 header">HEADER</div>
+                <div class="col-sm-12 col-lg-9 d-md-none d-lg-block menu ">MENU</div>
+                
+            </div>
+
+            <!--HERO-->
+            <div class="row order-sm-3 col-lg-12">
+
+                <div class="col-12 hero">HERO</div>
+
+            </div>
+
+            <!-- MENU Y CONTENIDO MENOS PARA LG -->
+            <div class="row d-lg-none">
+
+                <!-- MENU PARA LG -->
+                <div class="col-sm-12 col-md-3 d-none d-md-block d-sm-none d-lg-none menu">
+                    MENU
+                </div>
+
+                <!-- RESTO DE ITEMS MENOS PARA LG -->
+                <div class="col-sm-12 col-md-9">
+
+                    <div class="row">
+
+                        <div class="col-12 main">MAIN</div>
+                        <div class="col-12 banner">BANNER</div>
+                        <div class="col-md-8 extra">EXTRA</div>
+                        <div class="col-md-4 image">IMAGE</div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="row"><!-- MAIN PARA LG -->
+
+                <div class=" d-none d-lg-block col-md-3 main">
+                    MAIN
+                </div>
+
+                <!-- RESTO DE ITEMS PARA LG -->
+                <div class="col-sm-12 col-md-9 ">
+
+                    <div class="row blueL d-none offset-3 d-lg-block image">
+                        IMAGE
+                    </div>
+                    
+                    <div class="row green d-none offset-3 d-lg-block extra">
+                        EXTRA
+                    </div>
+
+                </div>
+
+                <!--BANNER PARA TAMAÑO LG-->
+                <div class="row d-none d-lg-block col-lg-12 gx-0 banner ">BANNER</div>
+
+            </div>
+
         </div>
-      </div>
 
-      <!-- versión para tablet (md): aparece alineado bajo MAIN usando offset (visible solo en md, oculto en lg) -->
-      <div class="row d-none d-md-flex d-lg-none w-100">
-        <div class="col-md-3"></div>
-        <div class="col-12 col-md-6 extra">EXTRA</div>
-        <div class="col-12 col-md-3 image">IMAGE</div>
-      </div>
+    </body>
 
-      <!-- versión móvil (xs): EXTRA e IMAGE en columna (visible solo en <md) -->
-      <div class="col-12 d-md-none extra">EXTRA</div>
-      <div class="col-12 d-md-none image">IMAGE</div>
-
-    </div>
-  </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-</body>
 </html>
