@@ -13,7 +13,7 @@ fun main(){
     } else {
 
         var numero = numeroDecimal
-        var binario = ""
+        var binario :String= ""
 
         while (numero > 0) {
             val residuo = numero % 2

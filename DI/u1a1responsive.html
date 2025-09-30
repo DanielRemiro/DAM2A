@@ -11,7 +11,8 @@
 
         <style>
 
-            *{text-align: center;}
+            /*Estilo css para el archivo*/
+            *{text-align: center;align-items: center;}
             .header{color:white;background-color: #0d1b2a;}
             .menu{color:white;background-color: #e63946;}
             .hero{color:white;background-color:#457b9d ;}
@@ -29,30 +30,30 @@
         <div class="container-fluid">
 
             <!-- HEADER Y MENU(PARA SM Y LG)-->
-            <div class="row order-sm-1 col-lg-12 ">
+            <div class="row order-sm-1 col-lg-12  ">
 
-                <div class="col-sm-12 col-lg-3 header">HEADER</div>
+                <div class="col-sm-12 col-lg-3 header ">HEADER</div>
                 <div class="col-sm-12 col-lg-9 d-md-none d-lg-block menu ">MENU</div>
                 
             </div>
 
             <!--HERO-->
-            <div class="row order-sm-3 col-lg-12">
+            <div class="row order-sm-3 col-lg-12 ">
 
-                <div class="col-12 hero">HERO</div>
+                <div class=" col-12 hero ">HERO</div>
 
             </div>
 
             <!-- MENU Y CONTENIDO MENOS PARA LG -->
-            <div class="row d-lg-none">
+            <div class="row d-lg-none ">
 
                 <!-- MENU PARA LG -->
-                <div class="col-sm-12 col-md-3 d-none d-md-block d-sm-none d-lg-none menu">
+                <div class="col-sm-12 col-md-3 d-none d-md-block d-sm-none d-lg-none menu ">
                     MENU
                 </div>
 
                 <!-- RESTO DE ITEMS MENOS PARA LG -->
-                <div class="col-sm-12 col-md-9">
+                <div class="col-sm-12 col-md-9 g-0">
 
                     <div class="row">
 
@@ -69,25 +70,25 @@
 
             <div class="row"><!-- MAIN PARA LG -->
 
-                <div class=" d-none d-lg-block col-md-3 main">
+                <div class=" d-none d-lg-block col-md-3 main g-0">
                     MAIN
                 </div>
 
                 <!-- RESTO DE ITEMS PARA LG -->
-                <div class="col-sm-12 col-md-9 ">
+                <div class="col-sm-12 col-lg-9 g-0">
 
-                    <div class="row blueL d-none offset-3 d-lg-block image">
+                    <div class="blueL d-none offset-3 d-lg-block col-9 image g-0">
                         IMAGE
                     </div>
                     
-                    <div class="row green d-none offset-3 d-lg-block extra">
+                    <div class=" green d-none offset-3 d-lg-block col-9 extra g-0">
                         EXTRA
                     </div>
 
                 </div>
 
                 <!--BANNER PARA TAMAÑO LG-->
-                <div class="row d-none d-lg-block col-lg-12 gx-0 banner ">BANNER</div>
+                <div class=" d-none d-lg-block col-lg-12 banner g-0">BANNER</div>
 
             </div>
 

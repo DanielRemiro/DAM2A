@@ -6,7 +6,9 @@
 
 fun main(){
 
-    val edad:Int = 19
+    print("Escribe tu edad: ")
+    val edad:Int =readLine()!!.toInt()
+    println()
 
     if(edad>=0) {
 
