@@ -1,17 +1,26 @@
 package Archivos;
 
 import Interfaces.GuardarInformacion;
-
 import java.io.*;
+import java.util.Scanner;
 
 public class Binario implements GuardarInformacion {
 
-    @Override
-    public void leer() {
+    private Scanner sc=new Scanner(System.in);
 
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(nombreArchivo))) {
-            List<T> lista = (List<T>) ois.readObject();
-            System.out.println("Datos leídos correctamente de " + nombreArchivo);
+    @Override
+    public void leer(){
+
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(elegirArchivo()))) {
+            while (true) {
+                try {
+                    Object obj = ois.readObject();
+                    System.out.println(obj);
+                } catch (EOFException e) {
+                    break;
+                }
+            }
+            System.out.println("Todos los objetos leídos correctamente.");
         } catch (IOException | ClassNotFoundException e) {
             System.out.println("Error al leer el archivo: " + e.getMessage());
         }
@@ -19,14 +28,23 @@ public class Binario implements GuardarInformacion {
     }
 
     @Override
-    public void escribir() {
+    public void escribir(Object obj){
 
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(nombreArchivo))) {
-            oos.writeObject(lista);
-            System.out.println("Datos guardados correctamente en " + nombreArchivo);
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(elegirArchivo()))) {
+            oos.writeObject(obj);
+            System.out.println("Datos guardados correctamente.");
         } catch (IOException e) {
             System.out.println("Error al escribir el archivo: " + e.getMessage());
         }
 
     }
+
+    public String elegirArchivo(){
+
+        System.out.println("Ingrese el nombre del archivo: ");
+        String archivo=sc.nextLine();
+
+        return archivo;
+    }
+
 }

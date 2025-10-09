@@ -1,78 +1,43 @@
 package Archivos;
 
 import Interfaces.GuardarInformacion;
-import Objetos.Alumno;
-import Objetos.Asignatura;
-import Objetos.Matricula;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.*;
+import java.util.Scanner;
 
 public class Csv implements GuardarInformacion {
 
+    private Scanner sc = new Scanner(System.in);
+
     @Override
     public void leer() {
+        String archivo = elegirArchivo();
 
-        leerAlumno(nombreArchivo);
-        leerAsignatura(nombreArchivo);
-        leerMatricula(nombreArchivo);
-
-    }
-
-    public static List<Alumno> leerAlumno(String archivo) {
-        List<Alumno> lista = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
             String linea;
             while ((linea = br.readLine()) != null) {
-                lista.add(Alumno.fromCSV(linea));
+                System.out.println(linea); // aquí podrías convertirla a objeto con fromCSV si quieres
             }
+            System.out.println("Lectura del CSV completada.");
         } catch (IOException e) {
             System.out.println("Error al leer CSV: " + e.getMessage());
         }
-        return lista;
-    }
-
-    public static List<Asignatura> leerAsignatura(String archivo) {
-        List<Asignatura> lista = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
-            String linea;
-            while ((linea = br.readLine()) != null) {
-                lista.add(Asignatura.fromCSV(linea));
-            }
-        } catch (IOException e) {
-            System.out.println("Error al leer CSV: " + e.getMessage());
-        }
-        return lista;
-    }
-
-    public static List<Matricula> leerMatricula(String archivo) {
-        List<Matricula> lista = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
-            String linea;
-            while ((linea = br.readLine()) != null) {
-                lista.add(Matricula.fromCSV(linea));
-            }
-        } catch (Exception e) {
-            System.out.println("Error al leer CSV: " + e.getMessage());
-        }
-        return lista;
     }
 
     @Override
-    public void escribir() {
+    public void escribir(Object obj) {
+        String archivo = elegirArchivo();
 
-        try (PrintWriter pw = new PrintWriter(new FileWriter(archivo))) {
-            for (T item : lista) {
-                pw.println(item.toString());
-            }
-            System.out.println("Datos guardados en " + archivo);
+        try (PrintWriter pw = new PrintWriter(new FileWriter(archivo, true))) { // true para append opcional
+            pw.println(obj.toString()); // se guarda la representación del objeto
+            System.out.println("Datos guardados correctamente en " + archivo);
         } catch (IOException e) {
             System.out.println("Error al escribir CSV: " + e.getMessage());
         }
-
     }
 
+    public String elegirArchivo() {
+        System.out.println("Ingrese el nombre del archivo CSV:");
+        return sc.nextLine();
+    }
 }
