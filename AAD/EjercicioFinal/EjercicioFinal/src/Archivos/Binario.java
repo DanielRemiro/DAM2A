@@ -6,18 +6,22 @@ import java.util.Scanner;
 
 public class Binario implements GuardarInformacion {
 
-    private Scanner sc=new Scanner(System.in);
+    private Scanner sc = new Scanner(System.in);
 
     @Override
-    public void leer(){
+    public void leer() {
 
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(elegirArchivo()))) {
             while (true) {
                 try {
                     Object obj = ois.readObject();
-                    System.out.println(obj);
+
+                    if (obj != null) {
+                        System.out.println(obj.getClass().getSimpleName() + ": " + obj);
+                    }
+
                 } catch (EOFException e) {
-                    break;
+                    break; // fin de archivo
                 }
             }
             System.out.println("Todos los objetos leídos correctamente.");
@@ -28,23 +32,41 @@ public class Binario implements GuardarInformacion {
     }
 
     @Override
-    public void escribir(Object obj){
+    public void escribir(Object obj) {
 
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(elegirArchivo()))) {
+        String archivo = elegirArchivo();
+        boolean append = new File(archivo).exists();
+
+        try (ObjectOutputStream oos = append
+                ? new AppendableObjectOutputStream(new FileOutputStream(archivo, true))
+                : new ObjectOutputStream(new FileOutputStream(archivo))) {
+
             oos.writeObject(obj);
-            System.out.println("Datos guardados correctamente.");
+            System.out.println("Objeto guardado correctamente en " + archivo);
+
         } catch (IOException e) {
             System.out.println("Error al escribir el archivo: " + e.getMessage());
         }
-
     }
 
-    public String elegirArchivo(){
-
-        System.out.println("Ingrese el nombre del archivo: ");
-        String archivo=sc.nextLine();
-
-        return archivo;
+    public String elegirArchivo() {
+        System.out.print("Ingrese el nombre del archivo (ej. datos.bin): ");
+        return sc.nextLine();
     }
 
+    /**
+     * Clase interna para evitar escribir cabeceras duplicadas
+     * cuando se hace append a un ObjectOutputStream existente.
+     */
+    private static class AppendableObjectOutputStream extends ObjectOutputStream {
+        public AppendableObjectOutputStream(OutputStream out) throws IOException {
+            super(out);
+        }
+
+        @Override
+        protected void writeStreamHeader() throws IOException {
+            // No escribir cabecera para evitar corrupción del archivo
+            reset();
+        }
+    }
 }
