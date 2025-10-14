@@ -1,4 +1,4 @@
-//Modela un sistema de bibliotecas, en la que se pueden prestar , devolver y saber el estado del
+//Modela un sistema de bibliotecas, en la que se pueden prestar, devolver y saber el estado del
 // préstamo de cada uno de los ítems que se encuentran en ella. Solo existen dos tipos de ítems
 // susceptibles de ser prestados: Libros y revistas. Los libros constan de título, autor e isbn.
 // De las revistas se registra el título y la fecha en que fueron publicadas.
@@ -7,7 +7,7 @@
 //Recorre la lista de los siguiente modos:
 //Que únicamente saque los libros que se encuentran en ella.
 //Que únicamente muestre las revistas de la lista.
-//Que únicamente muestre los ítems que han sido prestados , ya sean libros y/o revistas.
+//Que únicamente muestre los ítems que han sido prestados, ya sean libros y/o revistas.
 
 interface Prestable {
     fun prestar(listaStock: MutableList<Prestable>, listaPrestados: MutableList<Prestable>)
@@ -24,7 +24,7 @@ class Libro(val titulo: String, val autor: String, val isbn: Int, var estaPresta
             listaPrestados.add(this)
             println("El libro '$titulo' ha sido prestado.")
         } else {
-            println("⚠El libro '$titulo' ya está prestado.")
+            println("El libro '$titulo' ya está prestado.")
         }
     }
 
