@@ -1,80 +1,92 @@
 package Archivos;
 
-import Interfaces.GuardarInformacion;
 import Objetos.Alumno;
-import Objetos.Asignatura;
 import Objetos.Matricula;
+import Interfaces.AlumnoRepositorio;
 
+import org.w3c.dom.*;
+import javax.xml.parsers.*;
+import javax.xml.transform.*;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import java.io.*;
+import java.nio.file.*;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Scanner;
+import java.util.*;
 
-public class Xml implements GuardarInformacion {
+public class Xml implements AlumnoRepositorio {
 
-    private Scanner sc = new Scanner(System.in);
-    private final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    private final Path ruta;
 
-    @Override
-    public void leer() {
-        String archivo = elegirArchivo();
-
-        try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
-            String linea;
-            while ((linea = br.readLine()) != null) {
-                System.out.println(linea);
-            }
-            System.out.println("Lectura del XML completada.");
-        } catch (IOException e) {
-            System.out.println("Error al leer XML: " + e.getMessage());
-        }
+    public Xml(String rutaArchivo) {
+        this.ruta = Paths.get(rutaArchivo);
     }
 
     @Override
-    public void escribir(Object obj) {
-        String archivo = elegirArchivo();
-        boolean nuevoArchivo = !new File(archivo).exists();
+    public List<Alumno> cargar() throws Exception {
+        List<Alumno> lista = new ArrayList<>();
+        if (!Files.exists(ruta)) return lista;
 
-        try (PrintWriter pw = new PrintWriter(new FileWriter(archivo, true))) {
+        DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+        Document doc = db.parse(ruta.toFile());
+        NodeList alumnos = doc.getElementsByTagName("alumno");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
-            // Si es la primera vez que se escribe, abrimos el tag raíz
-            if (nuevoArchivo) pw.println("<objetos>");
-
-            if (obj instanceof Alumno a) {
-                pw.println("  <alumno>");
-                pw.println("    <id>" + a.getId() + "</id>");
-                pw.println("    <nombre>" + a.getNombre() + "</nombre>");
-                pw.println("    <email>" + a.getEmail() + "</email>");
-                pw.println("  </alumno>");
-
-            } else if (obj instanceof Asignatura as) {
-                pw.println("  <asignatura>");
-                pw.println("    <id>" + as.getId() + "</id>");
-                pw.println("    <nombre>" + as.getNombre() + "</nombre>");
-                pw.println("    <creditos>" + as.getCreditos() + "</creditos>");
-                pw.println("  </asignatura>");
-
-            } else if (obj instanceof Matricula m) {
-                pw.println("  <matricula>");
-                pw.println("    <idAlumno>" + m.getIdAlumno() + "</idAlumno>");
-                pw.println("    <idAsignatura>" + m.getIdAsignatura() + "</idAsignatura>");
-                pw.println("    <fecha>" + sdf.format(m.getFecha()) + "</fecha>");
-                pw.println("    <nota>" + m.getNota() + "</nota>");
-                pw.println("  </matricula>");
-
-            } else {
-                System.out.println("Tipo de objeto no reconocido para XML.");
-                return;
+        for (int i = 0; i < alumnos.getLength(); i++) {
+            Element e = (Element) alumnos.item(i);
+            Alumno a = new Alumno(
+                    e.getAttribute("id"),
+                    e.getElementsByTagName("nombre").item(0).getTextContent(),
+                    e.getElementsByTagName("email").item(0).getTextContent()
+            );
+            NodeList mats = e.getElementsByTagName("matricula");
+            for (int j = 0; j < mats.getLength(); j++) {
+                Element m = (Element) mats.item(j);
+                Date fecha = sdf.parse(m.getAttribute("fecha"));
+                double nota = Double.parseDouble(m.getAttribute("nota"));
+                a.agregarMatricula(new Matricula(fecha, nota));
             }
-
-            System.out.println("Datos guardados correctamente en " + archivo);
-        } catch (IOException e) {
-            System.out.println("Error al escribir XML: " + e.getMessage());
+            lista.add(a);
         }
+        return lista;
     }
 
-    public String elegirArchivo() {
-        System.out.print("Ingrese el nombre del archivo XML (ej. datos.xml): ");
-        return sc.nextLine();
+    @Override
+    public void guardar(List<Alumno> alumnos) throws Exception {
+        Files.createDirectories(ruta.getParent() == null ? Paths.get(".") : ruta.getParent());
+
+        DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+        Document doc = db.newDocument();
+        Element root = doc.createElement("alumnos");
+        doc.appendChild(root);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+        for (Alumno a : alumnos) {
+            Element eA = doc.createElement("alumno");
+            eA.setAttribute("id", a.getId());
+
+            Element nombre = doc.createElement("nombre");
+            nombre.setTextContent(a.getNombre());
+            eA.appendChild(nombre);
+
+            Element email = doc.createElement("email");
+            email.setTextContent(a.getEmail());
+            eA.appendChild(email);
+
+            for (Matricula m : a.getMatriculas()) {
+                Element eM = doc.createElement("matricula");
+                eM.setAttribute("fecha", sdf.format(m.getFecha()));
+                eM.setAttribute("nota", String.valueOf(m.getNota()));
+                eA.appendChild(eM);
+            }
+            root.appendChild(eA);
+        }
+
+        Transformer t = TransformerFactory.newInstance().newTransformer();
+        t.setOutputProperty(OutputKeys.INDENT, "yes");
+        t.transform(new DOMSource(doc), new StreamResult(ruta.toFile()));
     }
+
+    @Override
+    public String getRuta() { return ruta.toString(); }
 }

@@ -1,65 +1,76 @@
 package Archivos;
 
-import Interfaces.GuardarInformacion;
 import Objetos.Alumno;
-import Objetos.Asignatura;
 import Objetos.Matricula;
+import Interfaces.AlumnoRepositorio;
 
 import java.io.*;
+import java.nio.file.*;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Scanner;
+import java.util.*;
 
-public class Csv implements GuardarInformacion {
+public class Csv implements AlumnoRepositorio {
 
-    private Scanner sc = new Scanner(System.in);
-    private final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    private final Path ruta;
+
+    public Csv(String rutaArchivo) {
+        this.ruta = Paths.get(rutaArchivo);
+    }
 
     @Override
-    public void leer() {
-        String archivo = elegirArchivo();
-
-        try (BufferedReader br = new BufferedReader(new FileReader(archivo))) {
+    public List<Alumno> cargar() throws IOException {
+        List<Alumno> lista = new ArrayList<>();
+        if (!Files.exists(ruta)) return lista;
+        try (BufferedReader br = Files.newBufferedReader(ruta)) {
             String linea;
             while ((linea = br.readLine()) != null) {
-                System.out.println(linea);
+                // formato: id;nombre;email;fecha1|nota1,fecha2|nota2,...
+                String[] partes = linea.split(";", -1);
+                if (partes.length >= 3) {
+                    Alumno a = new Alumno(partes[0], partes[1], partes[2]);
+                    if (partes.length > 3 && !partes[3].isEmpty()) {
+                        String[] matriculas = partes[3].split(",");
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                        for (String m : matriculas) {
+                            String[] datos = m.split("\\|");
+                            if (datos.length == 2) {
+                                Date fecha = sdf.parse(datos[0]);
+                                double nota = Double.parseDouble(datos[1]);
+                                a.agregarMatricula(new Matricula(fecha, nota));
+                            }
+                        }
+                    }
+                    lista.add(a);
+                }
             }
-            System.out.println("Lectura del CSV completada.");
-        } catch (IOException e) {
-            System.out.println("Error al leer CSV: " + e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return lista;
+    }
+
+    @Override
+    public void guardar(List<Alumno> alumnos) throws IOException {
+        Files.createDirectories(ruta.getParent() == null ? Paths.get(".") : ruta.getParent());
+        try (BufferedWriter bw = Files.newBufferedWriter(ruta)) {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            for (Alumno a : alumnos) {
+                StringBuilder sb = new StringBuilder();
+                sb.append(a.getId()).append(";")
+                        .append(a.getNombre()).append(";")
+                        .append(a.getEmail()).append(";");
+
+                List<String> mats = new ArrayList<>();
+                for (Matricula m : a.getMatriculas()) {
+                    mats.add(sdf.format(m.getFecha()) + "|" + m.getNota());
+                }
+                sb.append(String.join(",", mats));
+                bw.write(sb.toString());
+                bw.newLine();
+            }
         }
     }
 
     @Override
-    public void escribir(Object obj) {
-        String archivo = elegirArchivo();
-
-        try (PrintWriter pw = new PrintWriter(new FileWriter(archivo, true))) {
-
-            if (obj instanceof Alumno a) {
-                pw.println(a.getId() + "," + a.getNombre() + "," + a.getEmail());
-
-            } else if (obj instanceof Asignatura as) {
-                pw.println(as.getId() + "," + as.getNombre() + "," + as.getCreditos());
-
-            } else if (obj instanceof Matricula m) {
-                pw.println(m.getIdAlumno() + "," + m.getIdAsignatura() + "," +
-                        sdf.format(m.getFecha()) + "," + m.getNota());
-
-            } else {
-                System.out.println("Tipo de objeto no reconocido para CSV.");
-                return;
-            }
-
-            System.out.println("Datos guardados correctamente en " + archivo);
-
-        } catch (IOException e) {
-            System.out.println("Error al escribir CSV: " + e.getMessage());
-        }
-    }
-
-    public String elegirArchivo() {
-        System.out.print("Ingrese el nombre del archivo CSV (ej. datos.csv): ");
-        return sc.nextLine();
-    }
+    public String getRuta() { return ruta.toString(); }
 }

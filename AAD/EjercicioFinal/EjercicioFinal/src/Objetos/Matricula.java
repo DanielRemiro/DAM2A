@@ -1,60 +1,31 @@
 package Objetos;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Matricula implements Serializable {
-
-    private String idAlumno;
-    private String idAsignatura;
     private Date fecha;
     private double nota;
 
-    public Matricula(String idAlumno, String idAsignatura, Date fecha, double nota) {
-        this.idAlumno = idAlumno;
-        this.idAsignatura = idAsignatura;
+    public Matricula(Date fecha, double nota) {
         this.fecha = fecha;
         this.nota = nota;
     }
 
-    public String getIdAlumno() {
-        return idAlumno;
-    }
+    public Matricula() {}
 
-    public void setIdAlumno(String idAlumno) {
-        this.idAlumno = idAlumno;
-    }
+    public Date getFecha() { return fecha; }
+    public void setFecha(Date fecha) { this.fecha = fecha; }
 
-    public String getIdAsignatura() {
-        return idAsignatura;
-    }
-
-    public void setIdAsignatura(String idAsignatura) {
-        this.idAsignatura = idAsignatura;
-    }
-
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
-
-    public double getNota() {
-        return nota;
-    }
-
-    public void setNota(double nota) {
-        this.nota = nota;
-    }
+    public double getNota() { return nota; }
+    public void setNota(double nota) { this.nota = nota; }
 
     @Override
     public String toString() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         return "Matricula{" +
-                "idAlumno='" + idAlumno + '\'' +
-                ", idAsignatura='" + idAsignatura + '\'' +
-                ", fecha=" + fecha +
+                "fecha=" + sdf.format(fecha) +
                 ", nota=" + nota +
                 '}';
     }
