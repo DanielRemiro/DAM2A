@@ -17,7 +17,7 @@ class Biblioteca(val nombre: String) {
     private val libros = mutableListOf<Libro>()
 
     // Clase interna Libro
-    inner class Libro(val titulo: String, val autor: String, val isbn: String) {
+    class Libro(val titulo: String, val autor: String, val isbn: String) {
         fun obtenerInfo(): String {
             return "$titulo escrito por autor $autor"
         }
