@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <title>Horario</title>
+        <style>
+    :root{
+      --teal:#0b6b73;       /* cabecera y columna hora */
+      --teal-dark:#07484b;
+      --muted-blue:#2f9bb1; /* variante */
+      --light-beige:#f1e6d6;
+      --peach:#f0c7b3;
+      --soft-green:#d9efe6;
+      --cream:#fffaf0;
+      --text-dark:#113237;
+      --white:#ffffff;
+      --border:#bfcfcf;
+      --radius:10px;
+      font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body{
+      margin:20px;
+      background: linear-gradient(180deg,#e9f3f4 0%, #ffffff 100%);
+      color:var(--text-dark);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    .card{
+      max-width:1000px;
+      margin:0 auto;
+      border-radius:14px;
+      box-shadow: 0 8px 24px rgba(15,35,35,0.12);
+      overflow:hidden;
+      background:var(--white);
+      border:1px solid rgba(10,40,40,0.04);
+    }
+
+    .table-wrap{
+      overflow:auto;
+    }
+
+    table {
+      border-collapse: separate;
+      width:100%;
+      min-width:900px;
+      table-layout: fixed;
+      border-spacing:0;
+    }
+
+    thead th{
+      background:var(--teal);
+      color:var(--white);
+      padding:14px 12px;
+      font-weight:700;
+      text-align:center;
+      border-bottom:3px solid rgba(0,0,0,0.06);
+      font-size:15px;
+    }
+
+    thead th:first-child{
+      text-align:left;
+      padding-left:18px;
+      width:130px;
+      background:linear-gradient(180deg,var(--teal-dark),var(--teal));
+    }
+
+    tbody td{
+      padding:10px 8px;
+      vertical-align:middle;
+      font-size:13px;
+      border-right:1px solid rgba(0,0,0,0.03);
+    }
+
+    tbody td:first-child{
+      background:var(--teal);
+      color:var(--white);
+      font-weight:700;
+      text-align:left;
+      padding-left:14px;
+      width:130px;
+    }
+
+    /* Rounded corners for outer cells */
+    thead th:first-child { border-top-left-radius: var(--radius); }
+    thead th:last-child  { border-top-right-radius: var(--radius); }
+    tbody tr:last-child td:first-child { border-bottom-left-radius: var(--radius); }
+    tbody tr:last-child td:last-child  { border-bottom-right-radius: var(--radius); }
+
+    /* Cell color classes to mimic the picture */
+    .c-blue{ background: linear-gradient(180deg,#cfeff5,#dff6fa); }
+    .c-deepblue{ background: linear-gradient(180deg,#8ccbd6,#bfeff6); font-weight:700; }
+    .c-beige{ background:var(--light-beige); }
+    .c-peach{ background:var(--peach); }
+    .c-green{ background:var(--soft-green); }
+    .c-cream{ background:var(--cream); }
+
+    /* Recreation (recreo) row */
+    .recreo {
+      background: #0d4650;
+      color: #fff;
+      text-align:center;
+      font-weight:700;
+      letter-spacing:0.6px;
+    }
+
+    /* Small screens: make table horizontally scrollable, reduce padding */
+    @media (max-width:700px){
+      body{margin:10px;}
+      thead th, tbody td{padding:8px 6px; font-size:12px;}
+      .card{box-shadow:none;}
+    }
+
+  </style>
+    </head>
+    <body>
+        <div class="card" role="region" aria-label="Horario semanal">
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Hora</th>
+                            <th>Lunes</th>
+                            <th>Martes</th>
+                            <th>Miércoles</th>
+                            <th>Jueves</th>
+                            <th>Viernes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>8:30 - 9:20</td>
+                            <td class="c-blue">DESARROLLO DE<br>INTERFACES</td>
+                            <td class="c-cream">SOSTENIBILIDAD</td>
+                            <td class="c-green">MODULO OPTATIVO</td>
+                            <td class="c-green">MODULO OPTATIVO</td>
+                            <td class="c-peach">PROYECTO<br>INTERMODULAR</td>
+                        </tr>
+
+                        <tr>
+                            <td>9:25 - 10:15</td>
+                            <td class="c-blue">DESARROLLO DE<br>INTERFACES</td>
+                            <td class="c-beige">PROGRAMACION<br>MULTIMEDIA Y
+                                D.M.</td>
+                            <td class="c-cream">PROGRAMACIÓN DE<br>SERVICIOS Y
+                                P.</td>
+                            <td class="c-green">MODULO OPTATIVO</td>
+                            <td class="c-peach">PROYECTO<br>INTERMODULAR</td>
+                        </tr>
+
+                        <tr>
+                            <td>10:20 - 11:10</td>
+                            <td class="c-blue">DESARROLLO DE<br>INTERFACES</td>
+                            <td class="c-beige">PROGRAMACION<br>MULTIMEDIA Y
+                                D.M.</td>
+                            <td class="c-cream">PROGRAMACIÓN DE<br>SERVICIOS Y
+                                P.</td>
+                            <td class="c-beige">ACCESO A DATOS</td>
+                            <td class="c-peach">SISTEMAS DE<br>GESTIÓN
+                                EMPRESARIAL</td>
+                        </tr>
+
+                        <tr>
+                            <td>11:10 - 11:40</td>
+                            <td colspan="5" class="recreo">RECREO</td>
+                        </tr>
+
+                        <tr>
+                            <td>11:40 - 12:30</td>
+                            <td class="c-cream">ACCESO A DATOS</td>
+                            <td class="c-beige">PROGRAMACION<br>MULTIMEDIA Y
+                                D.M.</td>
+                            <td class="c-beige">PROGRAMACION<br>MULTIMEDIA Y
+                                D.M.</td>
+                            <td class="c-cream">ACCESO A DATOS</td>
+                            <td class="c-peach">SISTEMAS DE<br>GESTIÓN
+                                EMPRESARIAL</td>
+                        </tr>
+
+                        <tr>
+                            <td>12:35 - 13:25</td>
+                            <td class="c-cream">ACCESO A DATOS</td>
+                            <td class="c-peach">ITINERARIO<br>PERSONAL
+                                P.L.E.</td>
+                            <td class="c-beige">PROGRAMACION<br>MULTIMEDIA Y
+                                D.M.</td>
+                            <td class="c-cream">SISTEMAS DE<br>GESTIÓN
+                                EMPRESARIAL</td>
+                            <td class="c-blue">DESARROLLO DE<br>INTERFACES</td>
+                        </tr>
+
+                        <tr>
+                            <td>13:30 - 14:20</td>
+                            <td class="c-cream">ACCESO A DATOS</td>
+                            <td class="c-peach">ITINERARIO<br>PERSONAL
+                                P.L.E.</td>
+                            <td class="c-beige">PROGRAMACION<br>MULTIMEDIA Y
+                                D.M.</td>
+                            <td class="c-cream">SISTEMAS DE<br>GESTIÓN
+                                EMPRESARIAL</td>
+                            <td class="c-blue">DESARROLLO DE<br>INTERFACES</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>
