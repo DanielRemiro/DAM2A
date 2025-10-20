@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<alumnos>
+    <alumno id="1">
+        <nombre>Dani</nombre>
+        <email>d</email>
+        <matricula fecha="22/04/3000" nota="4.0"/>
+        <matricula fecha="22/03/3000" nota="3.0"/>
+    </alumno>
+    <alumno id="2">
+        <nombre>ee</nombre>
+        <email>fff</email>
+    </alumno>
+</alumnos>
