@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat con Bootstrap</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Estilo para que el cuerpo del chat tenga un scroll vertical */
+        .chat-body {
+            height: 400px; /* Altura fija para la ventana de mensajes */
+            overflow-y: scroll; /* Añade la barra de scroll si el contenido se desborda */
+            background-color: #f1f1f1;
+        }
+
+        /* Estilos para los bocadillos de chat */
+        .message {
+            padding: 10px 15px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+            max-width: 70%;
+        }
+
+        /* Mensaje enviado (derecha) */
+        .sent {
+            background-color: #dcf8c6; /* Color verde claro, tipo WhatsApp */
+            align-self: flex-end; /* Alinea este elemento a la derecha */
+        }
+
+        /* Mensaje recibido (izquierda) */
+        .received {
+            background-color: #ffffff; /* Fondo blanco */
+            align-self: flex-start; /* Alinea este elemento a la izquierda */
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container mt-5">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Chat con Ana</h5>
+                </div>
+
+                <div class="card-body chat-body d-flex flex-column p-4">
+                    <div class="message received">
+                        <p class="mb-0">¡Hola! ¿Qué tal el examen de Bootstrap?</p>
+                        <small class="text-muted">10:30 AM</small>
+                    </div>
+
+                    <div class="message sent">
+                        <p class="mb-0">¡Hola, Ana! Bien, repasando un poco. Este ejemplo de chat me viene genial.</p>
+                        <small class="text-muted">10:31 AM</small>
+                    </div>
+
+                    <div class="message received">
+                        <p class="mb-0">¡Me alegro! Si tienes alguna duda, pregunta.</p>
+                        <small class="text-muted">10:32 AM</small>
+                    </div>
+
+                    <div class="message sent">
+                        <p class="mb-0">Perfecto, gracias. La clave parece estar en Flexbox para alinear los mensajes.</p>
+                        <small class="text-muted">10:33 AM</small>
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Escribe un mensaje...">
+                        <button class="btn btn-primary" type="button">Enviar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
