@@ -1,0 +1,3 @@
+# Ignorar carpetas de configuración de IDEs
+.idea/
+.vscode/
