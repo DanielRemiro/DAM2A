@@ -41,4 +41,4 @@ En este repositorio encontrarás código y proyectos que utilizan principalmente
 
 Siéntete libre de explorar las carpetas para consultar el material. Si quieres descargar todo el contenido, puedes clonar el repositorio en tu máquina local con el siguiente comando:
 
-    git clone [https://github.com/DanielRemiro/DAM2A.git](https://github.com/DanielRemiro/DAM2A.git)
+    git clone https://github.com/DanielRemiro/DAM2A.git
