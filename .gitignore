@@ -1,3 +1,5 @@
 # Ignorar carpetas de configuración de IDEs
 .idea/
 .vscode/
+# Ignorar todos los archivos comprimidos
+*.zip
