@@ -1,4 +1,4 @@
-class LifeOff2 implements Runnable {
+class LifeOff2 extends Thread {
     protected int countDown = 10;
     private static int taskCount = 0;
     private final int id = taskCount++;
@@ -34,3 +34,4 @@ public class Main2 {
         System.out.println("Comienza la cuenta atras (dicho desde el hilo main)");
     }
 }
+
