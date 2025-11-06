@@ -1,7 +1,6 @@
 version: '3.8'
 
 services:
-  # Servicio de Odoo
   web:
     image: odoo:19.0
     depends_on:
@@ -17,16 +16,13 @@ services:
       - PASSWORD=odoo
       - DATABASE=postgres
     restart: unless-stopped
-
-  # Servicio de la Base de Datos PostgreSQL
   db:
     image: postgres:16
     environment:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=odoo
       - POSTGRES_PASSWORD=odoo
-    # --- LÍNEA AÑADIDA ---
-    # Mapea el puerto 5432 de tu PC al puerto 5432 del contenedor
+    # Mapea el puerto 5432 del PC al puerto 5432 del contenedor
     ports:
       - "5432:5432"
     volumes:
