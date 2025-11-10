@@ -1,6 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <data>
 
+        <record id="view_courses_course_tree" model="ir.ui.view">
+            <field name="name">courses.course.tree</field>
+            <field name="model">courses.course</field>
+            <field name="arch" type="xml">
+                <tree string="Courses">
+                    <field name="name"/>
+                    <field name="duration"/>
+                    <field name="active" widget="boolean_toggle"/>
+                </tree>
+            </field>
+        </record>
 
+        <record id="view_courses_course_form" model="ir.ui.view">
+            <field name="name">courses.course.form</field>
+            <field name="model">courses.course</field>
+            <field name="arch" type="xml">
+                <form string="Course">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="duration"/>
+                            </group>
+                            <group>
+                                <field name="active"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Description">
+                                <field name="description"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
 
+        <record id="action_courses_course" model="ir.actions.act_window">
+            <field name="name">Courses</field>
+            <field name="res_model">courses.course</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    ¡Crea tu primer curso!
+                </p>
+            </field>
+        </record>
+
+        <menuitem
+            id="menu_courses_root"
+            name="Academy"
+            sequence="10"/>
+
+        <menuitem
+            id="menu_courses_course"
+            name="Courses"
+            parent="menu_courses_root"
+            action="action_courses_course"
+            sequence="10"/>
+
+    </data>
 </odoo>

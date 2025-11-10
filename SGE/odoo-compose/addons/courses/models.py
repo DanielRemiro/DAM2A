@@ -10,3 +10,4 @@ class Course(models.Model):
     description = fields.Text(string='Description')
     duration = fields.Integer(string='Duration (hours)')
     active = fields.Boolean(string='Active', default=True)
+ 
