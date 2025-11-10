@@ -14,7 +14,7 @@ public class Main2 {
 
             System.out.println("Conexión exitosa a la base de datos.");
 
-            String sqlQuery = "SELECT * FROM producto";
+            String sqlQuery = "SELECT * FROM producto where id=1000";
             Statement st = con.createStatement();
             ResultSet rs= st.executeQuery(sqlQuery);
 
