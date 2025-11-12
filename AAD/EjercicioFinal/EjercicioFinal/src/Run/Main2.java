@@ -27,6 +27,30 @@ public class Main2 {
                         id, nombre, precio, descripcion == null ? "" : descripcion);
             }
 
+            st.close();
+
+            //Insert
+
+            st=con.createStatement();
+
+            //sqlQuery = "INSERT INTO producto (id, nombre, precio, descripcion) VALUES (1004, 'Producto4', 40.0, 'Descripción del producto 4')";
+            //int filasInsertadas=st.executeUpdate(sqlQuery);
+            //System.out.println("Filas insertadas: " + filasInsertadas);
+
+            //Update
+
+            //sqlQuery = "UPDATE producto SET precio=45.0 WHERE id=1004";
+            //int filasActualizadas=st.executeUpdate(sqlQuery);
+            //System.out.println("Filas actualizadas: " + filasActualizadas);
+
+            //Delete
+            //sqlQuery = "DELETE FROM producto WHERE id=1004";
+            //int filasBorradas=st.executeUpdate(sqlQuery);
+            //System.out.println("Filas borradas: " + filasBorradas);
+
+            st.close();
+
+
 
         } catch (SQLException e) {
             System.out.println("Error al conectar a la base de datos: " + e.getMessage());
