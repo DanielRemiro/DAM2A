@@ -1,7 +1,7 @@
-package com.proyecto.repository;
+package repository;
 
-import com.proyecto.model.Producto;
-import com.proyecto.util.DatabaseConnection;
+import model.Producto;
+import util.DatabaseConnection;
 
 import java.io.ByteArrayInputStream;
 import java.sql.*;

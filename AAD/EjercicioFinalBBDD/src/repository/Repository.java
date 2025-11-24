@@ -1,4 +1,4 @@
-package com.proyecto.repository;
+package repository;
 import java.util.List;
 
 public interface Repository<T> {

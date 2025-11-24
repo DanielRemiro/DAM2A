@@ -1,4 +1,4 @@
-package com.proyecto.model;
+package model;
 
 public class Producto {
     private int id;

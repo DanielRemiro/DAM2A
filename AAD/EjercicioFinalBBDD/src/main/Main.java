@@ -1,9 +1,9 @@
-package com.proyecto.main;
+package main;
 
-import com.proyecto.model.Producto;
-import com.proyecto.repository.ProductoRepositoryJDBC;
-import com.proyecto.repository.Repository;
-import com.proyecto.service.GestorBaseDatos;
+import model.Producto;
+import repository.ProductoRepositoryJDBC;
+import repository.Repository;
+import service.GestorBaseDatos;
 
 import java.io.File;
 import java.io.IOException;
