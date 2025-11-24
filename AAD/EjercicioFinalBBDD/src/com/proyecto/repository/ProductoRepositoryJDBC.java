@@ -17,7 +17,7 @@ public class ProductoRepositoryJDBC implements Repository<Producto> {
     @Override
     public List<Producto> listar() {
         List<Producto> productos = new ArrayList<>();
-        // try-with-resources [cite: 30]
+
         try (Statement stmt = getConnection().createStatement();
              ResultSet rs = stmt.executeQuery("SELECT * FROM productos")) {
             while (rs.next()) {
@@ -50,7 +50,7 @@ public class ProductoRepositoryJDBC implements Repository<Producto> {
     @Override
     public void guardar(Producto producto) {
         String sql;
-        // Diferenciar entre INSERT y UPDATE (upsert básico)
+
         if (producto.getId() > 0) {
             sql = "UPDATE productos SET nombre=?, precio=?, categoria_id=?, imagen=? WHERE id=?";
         } else {
@@ -73,7 +73,7 @@ public class ProductoRepositoryJDBC implements Repository<Producto> {
                 stmt.setInt(5, producto.getId());
             }
 
-            stmt.executeUpdate(); // [cite: 39]
+            stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -86,7 +86,7 @@ public class ProductoRepositoryJDBC implements Repository<Producto> {
             stmt.setInt(1, id);
             stmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace(); // Aquí saltaría error si hay restricción FK
+            e.printStackTrace();
         }
     }
 
@@ -96,8 +96,6 @@ public class ProductoRepositoryJDBC implements Repository<Producto> {
         p.setNombre(rs.getString("nombre"));
         p.setPrecio(rs.getDouble("precio"));
         p.setCategoriaId(rs.getInt("categoria_id"));
-        // Leer BLOB si se requiere
-        // p.setImagen(rs.getBytes("imagen"));
         return p;
     }
 }

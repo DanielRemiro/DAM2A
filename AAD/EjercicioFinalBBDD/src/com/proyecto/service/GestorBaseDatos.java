@@ -12,7 +12,6 @@ public class GestorBaseDatos {
                 "id INT AUTO_INCREMENT PRIMARY KEY, " +
                 "nombre VARCHAR(50) NOT NULL)";
 
-        // Relación 1-N con ON DELETE RESTRICT (Justificación: No borrar cat si tiene productos)
         String sqlProd = "CREATE TABLE IF NOT EXISTS productos (" +
                 "id INT AUTO_INCREMENT PRIMARY KEY, " +
                 "nombre VARCHAR(100) NOT NULL, " +
@@ -21,8 +20,6 @@ public class GestorBaseDatos {
                 "imagen LONGBLOB, " +
                 "FOREIGN KEY (categoria_id) REFERENCES categorias(id) ON DELETE RESTRICT)";
 
-        // Tabla intermedia para relación N-M (Pedidos <-> Productos)
-        // ON DELETE CASCADE (Justificación: Si borro el pedido, se borran sus líneas)
         String sqlPedido = "CREATE TABLE IF NOT EXISTS pedidos (id INT AUTO_INCREMENT PRIMARY KEY, cliente VARCHAR(50))";
         String sqlLineas = "CREATE TABLE IF NOT EXISTS linea_pedidos (" +
                 "pedido_id INT, producto_id INT, " +
@@ -51,8 +48,6 @@ public class GestorBaseDatos {
         } catch (SQLException e) {
             System.err.println("Error inicializando BD. Haciendo Rollback.");
             e.printStackTrace();
-            // El rollback es automático al cerrar la conexión si no se hizo commit,
-            // pero podemos forzarlo si manejamos la conexión fuera del try-with-resources.
         }
     }
 }

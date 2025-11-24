@@ -14,18 +14,15 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("--- INICIO APP ---");
 
-        // 1. Inicialización y Transacciones [cite: 12, 47]
         GestorBaseDatos gestor = new GestorBaseDatos();
         gestor.inicializar();
 
-        // 2. Uso del Repository
+
         Repository<Producto> repo = new ProductoRepositoryJDBC();
 
-        // 3. CRUD: Insertar (Create)
         System.out.println("\n--- INSERTANDO PRODUCTO ---");
-        Producto p1 = new Producto("Portátil Gaming", 1200.50, 1); // Categoria 1 creada en init
+        Producto p1 = new Producto("Portátil Gaming", 1200.50, 1);
 
-        // Simulación carga imagen BLOB (asegúrate de tener una imagen de prueba o comenta esto)
         try {
             File file = new File("imagen_prueba.jpg");
             if(file.exists()) {
@@ -49,7 +46,7 @@ public class Main {
             System.out.println("\n--- MODIFICANDO PRODUCTO ---");
             Producto aModificar = lista.get(0);
             aModificar.setPrecio(999.99);
-            repo.guardar(aModificar); // Al tener ID, hará UPDATE
+            repo.guardar(aModificar);
         }
 
         // 6. CRUD: Eliminar (Delete)

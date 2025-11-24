@@ -14,7 +14,6 @@ public class Producto {
         this.categoriaId = categoriaId;
     }
 
-    // Getters y Setters omitidos por brevedad (genéralos en tu IDE)
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
     public String getNombre() { return nombre; }
