@@ -13,12 +13,12 @@ facilitar el acceso al material desde cualquier lugar y servir como portafolio d
 -------------------------------
 El repositorio está organizado en carpetas, donde cada una corresponde a una de las asignaturas del ciclo:
 
-    * 📂 **AAD**: Acceso a Datos
-    * 📂 **DI**: Desarrollo de Interfaces
-    * 📂 **JavaPrimerCurso**: Material de repaso o base de Java.
-    * 📂 **MO**: Móviles (podrías especificar el nombre completo si lo prefieres)
-    * 📂 **PSP**: Programación de Servicios y Procesos
-    * 📂 **Programacion**: Programación (posiblemente material de repaso o avanzado).
+    * 📂 **AAD**: Acceso a Datos.
+    * 📂 **DI**: Desarrollo de Interfaces.
+    * 📂 **JavaPrimerCurso**: Material de primer curso de DAM.
+    * 📂 **MO**: Módulo optativo.
+    * 📂 **PSP**: Programación de Servicios y Procesos.
+    * 📂 **Programacion**: Programación multimedia.
     * 📂 **SGE**: Sistemas de Gestión Empresarial
 
 Dentro de cada carpeta se encuentran los proyectos y ejercicios correspondientes.
