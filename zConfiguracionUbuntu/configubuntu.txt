@@ -1,0 +1,19 @@
+sudo apt update && sudo apt upgrade
+
+sudo apt install terminator
+
+sudo apt install git -y
+git clone https://github.com/JoTerrance/.DotFiles.git $HOME/
+chmod +x $HOME/.DotFiles/install.sh
+export CODESPACE_NAME="true"
+cd $HOME/.DotFiles && ./install.sh
+
+sudo apt update  && \
+sudo apt install git -y && \
+rm -rf "$HOME/.DotFiles" && \
+git clone https://github.com/JoTerrance/.DotFiles.git $HOME/.DotFiles && \
+chmod +x "$HOME/.DotFiles/install.sh" && \
+cd "$HOME/.DotFiles/" && \
+./install.sh
+
+sh <(curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install) --daemon
