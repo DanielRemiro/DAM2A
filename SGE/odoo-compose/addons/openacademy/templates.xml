@@ -1,0 +1,7 @@
+<odoo>
+
+        <record model="{model name}" id="{record identifier}">
+            <field name="{a field name}">{a value}</field>
+        </record>
+
+</odoo>
