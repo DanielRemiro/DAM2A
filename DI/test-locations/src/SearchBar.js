@@ -1,6 +1,6 @@
 function SearchBar({ query, setQuery }) {
   return (
-    <div style={{ marginBottom: "20px" }}>
+    <div >
       <input
         type="text"
         placeholder="Busca una localización (ej: Earth)..."
