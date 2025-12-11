@@ -26,24 +26,23 @@ public class GestorBaseDatos {
                 "FOREIGN KEY (pedido_id) REFERENCES pedidos(id) ON DELETE CASCADE, " +
                 "FOREIGN KEY (producto_id) REFERENCES productos(id))";
 
-        // Transacción JDBC
+
         try (Connection conn = DatabaseConnection.getConnection()) {
-            conn.setAutoCommit(false); // Inicio Transacción [cite: 51]
+            conn.setAutoCommit(false);
 
             try (Statement stmt = conn.createStatement()) {
-                // Crear tablas
+
                 stmt.execute(sqlCat);
                 stmt.execute(sqlProd);
                 stmt.execute(sqlPedido);
                 stmt.execute(sqlLineas);
 
-                // Precarga de datos (solo si están vacías para no duplicar)
                 if(stmt.executeUpdate("INSERT IGNORE INTO categorias (id, nombre) VALUES (1, 'Electrónica')") > 0) {
-                    System.out.println("--> Datos iniciales cargados.");
+                    System.out.println(" Datos iniciales cargados.");
                 }
             }
 
-            conn.commit(); // Confirmar cambios [cite: 47]
+            conn.commit();
             System.out.println("Base de datos inicializada correctamente.");
         } catch (SQLException e) {
             System.err.println("Error inicializando BD. Haciendo Rollback.");

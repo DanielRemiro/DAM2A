@@ -1,4 +1,3 @@
-version: '3.8'
 
 services:
   web:
@@ -22,7 +21,6 @@ services:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=odoo
       - POSTGRES_PASSWORD=odoo
-    # Mapea el puerto 5432 del PC al puerto 5432 del contenedor
     ports:
       - "5432:5432"
     volumes:

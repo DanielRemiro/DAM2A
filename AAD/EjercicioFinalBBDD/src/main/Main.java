@@ -36,15 +36,13 @@ public class Main {
         repo.guardar(p1);
         System.out.println("Producto guardado.");
 
-        // 4. CRUD: Listar (Read)
         System.out.println("\n--- LISTANDO PRODUCTOS ---");
         List<Producto> lista = repo.listar();
         lista.forEach(System.out::println);
 
-        // 5. CRUD: Modificar (Update)
         if (!lista.isEmpty()) {
             System.out.println("\n--- MODIFICANDO PRODUCTO ---");
-            Producto aModificar = lista.get(0);
+            Producto aModificar = lista.get(2);
             aModificar.setPrecio(999.99);
             repo.guardar(aModificar);
         }
