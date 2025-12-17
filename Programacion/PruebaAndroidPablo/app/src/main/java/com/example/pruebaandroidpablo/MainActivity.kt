@@ -13,16 +13,21 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ElevatedButton
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -40,7 +45,11 @@ class MainActivity : ComponentActivity() {
                     var showGreeting2 by rememberSaveable { mutableStateOf(false) }
 
                     if (showGreeting2) {
-                        Greeting2(names = listOf("Android","rrr" ,"dddd","fffff","ggggg","Pablo","de la fuente","en la calle","en el arbol","gracias","futbol"), modifier = Modifier.padding(innerPadding))
+                        Greeting2(
+                            names = listOf("Android","rrr" ,"dddd","fffff","ggggg","Pablo","de la fuente","en la calle","en el arbol","gracias","futbol"),
+                            modifier = Modifier.padding(innerPadding),
+                            onNavigateBack = { showGreeting2 = false }
+                        )
                     } else {
                         NuevaPantalla(
                             name = "Pablo",
@@ -61,18 +70,20 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
         if (expanded.value) 48.dp else 0.dp,
         animationSpec = spring(
             dampingRatio = Spring.DampingRatioMediumBouncy
-        )
+        ),
+        label = "padding"
     )
-
 
     Surface(
         color = MaterialTheme.colorScheme.primary,
         modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp),
         shape = MaterialTheme.shapes.medium
     ) {
-        Row(modifier = Modifier
-            .padding(24.dp)
-            .padding(bottom = extraPadding.coerceAtLeast(0.dp))) {
+        Row(
+            modifier = Modifier
+                .padding(24.dp)
+                .padding(bottom = extraPadding.coerceAtLeast(0.dp))
+        ) {
 
             Column(
                 modifier = Modifier
@@ -90,38 +101,54 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
             }
 
             ElevatedButton(
-                onClick = { expanded.value=!expanded.value }, colors = ButtonDefaults.buttonColors(
+                onClick = { expanded.value = !expanded.value }, colors = ButtonDefaults.buttonColors(
                     containerColor = Color.Green,
                     contentColor = Color.Black
                 )
             ) {
-                Text(if(!expanded.value)"Muestra mas" else "Muestra menos")
+                Text(if (!expanded.value) "Muestra mas" else "Muestra menos")
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun Greeting2(names: List<String>, modifier: Modifier = Modifier, onNavigateBack: () -> Unit) {
+
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text("Pagina greeting") },
+                navigationIcon = {
+                    IconButton(onClick = onNavigateBack) {
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = "Volver"
+                        )
+                    }
+                }
+            )
+        }
+    ) { innerPadding ->
+        LazyColumn(modifier = Modifier.padding(innerPadding)) {
+            items(names) { name ->
+                Greeting(name = name)
             }
         }
     }
 }
 
 @Composable
-fun Greeting2(names: List<String>, modifier: Modifier = Modifier) {
-
-    LazyColumn(modifier = modifier) {
-        items(names) { name ->
-            Greeting(name = name)
-        }
-    }
-}
-
-@Composable
-fun NuevaPantalla(name: String, modifier: Modifier = Modifier, onNavigate: () -> Unit){
+fun NuevaPantalla(name: String, modifier: Modifier = Modifier, onNavigate: () -> Unit) {
     Column(modifier = modifier) {
         Text(
-            text = "Este es el texto"
-            ,modifier = Modifier.padding(24.dp)
+            text = "Este es el texto", modifier = Modifier.padding(24.dp)
         )
         ElevatedButton(
-            onClick = onNavigate,modifier = Modifier.padding(40.dp)
+            onClick = onNavigate, modifier = Modifier.padding(40.dp)
 
-        ){
+        ) {
             Text("Pulsa aqui")
         }
     }
