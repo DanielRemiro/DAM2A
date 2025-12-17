@@ -12,6 +12,8 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -25,6 +27,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -32,6 +35,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.unit.dp
 import com.example.pruebaandroidpablo.ui.theme.PruebaAndroidPabloTheme
 
@@ -116,7 +120,10 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Composable
 fun Greeting2(names: List<String>, modifier: Modifier = Modifier, onNavigateBack: () -> Unit) {
 
+    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
+
     Scaffold(
+        modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             TopAppBar(
                 title = { Text("Pagina greeting") },
@@ -127,7 +134,7 @@ fun Greeting2(names: List<String>, modifier: Modifier = Modifier, onNavigateBack
                             contentDescription = "Volver"
                         )
                     }
-                }
+                }, scrollBehavior = scrollBehavior
             )
         }
     ) { innerPadding ->
@@ -137,6 +144,13 @@ fun Greeting2(names: List<String>, modifier: Modifier = Modifier, onNavigateBack
             }
         }
     }
+}
+
+@Composable
+fun Greeting3(name: String, modifier: Modifier = Modifier){
+    LazyVerticalGrid(
+        columns = GridCells.Adaptive(minSize = 128.dp)
+    ) { }
 }
 
 @Composable
