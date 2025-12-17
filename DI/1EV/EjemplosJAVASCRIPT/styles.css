@@ -1,0 +1,122 @@
+/* Reset básico y tipografía */
+:root {
+    --primary-color: #3b82f6;
+    --primary-hover: #2563eb;
+    --text-color: #1f2937;
+    --bg-color: #f3f4f6;
+    --card-bg: #ffffff;
+}
+
+body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Contenedor principal centrado */
+header,
+main,
+footer {
+    max-width: 600px;
+    width: 100%;
+    margin: 0 auto;
+    background-color: var(--card-bg);
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+/* Estilos del Header */
+header {
+    border-radius: 12px 12px 0 0;
+    border-bottom: 1px solid #e5e7eb;
+    text-align: center;
+}
+
+header h1 {
+    margin-top: 0;
+    color: #111827;
+    font-size: 1.75rem;
+}
+
+header p {
+    color: #6b7280;
+}
+
+/* Estilos del contenido */
+main {
+    /* Elimina bordes duplicados si se juntan */
+}
+
+section {
+    margin-bottom: 1.5rem;
+}
+
+h2 {
+    color: #374151;
+    font-size: 1.25rem;
+    border-left: 4px solid var(--primary-color);
+    padding-left: 10px;
+    margin-bottom: 1rem;
+}
+
+ul {
+    background-color: #f9fafb;
+    padding: 1rem 1rem 1rem 2.5rem;
+    border-radius: 8px;
+    margin: 0;
+}
+
+li {
+    margin-bottom: 0.5rem;
+}
+
+li:last-child {
+    margin-bottom: 0;
+}
+
+/* Estilos del botón */
+button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    display: inline-block;
+}
+
+button:hover {
+    background-color: var(--primary-hover);
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+#mensaje {
+    margin-top: 1rem;
+    font-weight: 500;
+    color: var(--primary-color);
+    min-height: 1.6em;
+    /* Reserva espacio para evitar saltos */
+}
+
+/* Estilos del Footer */
+footer {
+    border-radius: 0 0 12px 12px;
+    border-top: 1px solid #e5e7eb;
+    text-align: center;
+    color: #9ca3af;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    /* Espacio al final de la página */
+}

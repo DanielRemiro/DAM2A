@@ -1,0 +1,15 @@
+function CharacterModal({ character, onClose }) {
+  if (!character) return null;
+
+  return (
+      <div>
+        <img src={character.image} alt={character.name} />
+        <h2>{character.name}</h2>
+        <p><strong>Estado:</strong> {character.status}</p>
+        <p><strong>Especie:</strong> {character.species}</p>
+        <button onClick={onClose}>Cerrar</button>
+      </div>
+  );
+}
+
+export default CharacterModal;
