@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Repaso Componentes</string>
+    <string name="titulo_pantalla">Información alumno</string>
+    <string name="label_nombre">Nombre:</string>
+    <string name="hint_nombre">Ingrese nombre</string>
+    <string name="label_apellidos">Apellidos:</string>
+    <string name="hint_apellidos">Ingrese apellidos</string>
+    <string name="label_hermanos">Número de hermanos:</string>
+    <string name="opcion_seleccionar">Seleccionar</string>
+    <string name="btn_mostrar">Mostrar</string>
+
+    <plurals name="mensaje_resultado_hermanos">
+        <item quantity="one">Soy %1$s %2$s y tengo %3$d hermano</item>
+        <item quantity="other">Soy %1$s %2$s y tengo %3$d hermanos</item>
+    </plurals>
+</resources>
