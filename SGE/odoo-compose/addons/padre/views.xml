@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+<!-- Form for the 'padre' model -->
+    <record id="view_persona_form" model="ir.ui.view">
+        <field name="name">persona.form</field>
+        <field name="model">padre.persona</field>
+        <field name="arch" type="xml">
+            <form string="Padre">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="edad"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+<!-- List for the 'Persona' model -->
+    <record id="view_persona_list" model="ir.ui.view">
+        <field name="name">persona.list</field>
+        <field name="model">padre.persona</field>
+        <field name="arch" type="xml">
+            <list string="Personas">
+                <field name="name"/>
+                <field name="edad"/>
+            </list>
+        </field>
+    </record>
+<!-- Action to open the 'Persona' views -->
+    <record id="action_persona" model="ir.actions.act_window">
+        <field name="name">Personas</field>
+        <field name="res_model">padre.persona</field>
+        <field name="view_mode">list,form</field>
+    </record>
+<!-- Menu item for the 'Persona' model -->
+    <menuitem id="menu_persona_root" name="Personas"/>
+    <menuitem id="menu_persona" name="Manage Personas" parent="menu_persona_root" action="action_persona"/>
+</odoo>

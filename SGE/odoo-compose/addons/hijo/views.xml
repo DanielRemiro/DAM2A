@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+<!-- Form for the 'hijo' model -->
+    <record id="view_hijo_form" model="ir.ui.view">
+        <field name="name">hijo.form</field>
+        <field name="model">hijo.hijo</field>
+        <field name="arch" type="xml">
+            <form string="Hijo">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="edad"/>
+                        <field name="padre_id"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+<!-- List for the 'Hijo' model -->
+    <record id="view_hijo_list" model="ir.ui.view">
+        <field name="name">hijo.list</field>
+        <field name="model">hijo.hijo</field>
+        <field name="arch" type="xml">
+            <list string="Hijos">
+                <field name="name"/>
+                <field name="edad"/>
+                <field name="padre_id"/>
+            </list>
+        </field>
+    </record>
+<!-- Action to open the 'Hijo' views -->
+    <record id="action_hijo" model="ir.actions.act_window">
+        <field name="name">Hijos</field>
+        <field name="res_model">hijo.hijo</field>  
+        <field name="view_mode">list,form</field>
+    </record>
+<!-- Menu item for the 'Hijo' model -->
+    <menuitem id="menu_hijo_root" name="Hijos"/>
+    <menuitem id="menu_hijo" name="Manage Hijos" parent="menu_hijo_root" action="action_hijo"/>
+</odoo>

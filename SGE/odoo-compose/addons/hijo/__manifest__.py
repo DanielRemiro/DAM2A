@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "mimodulo",
+    'name': "hijo",
 
-    'summary': """Manage trainings""",
+    'summary': """herencia de módulos hijo""",
 
     'description': """
         Módulo para entrenar
@@ -14,5 +14,9 @@
     'category': 'odoo',
     'version': '0.1',
 
+    'depends': ['padre'],
 
+    'data': [
+        'views.xml',
+    ]
 }
