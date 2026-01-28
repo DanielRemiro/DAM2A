@@ -13,7 +13,7 @@ public class Main {
             // ========================================================================
             // Crear un producto
             // ========================================================================
-            System.out.println("--- 0. PREPARACIÓN: Creando producto inicial ---");
+            System.out.println("---  PREPARACIÓN: Creando producto inicial ---");
             em.getTransaction().begin();
             Producto pInicial = new Producto("Monitor 4K", 300.00);
             em.persist(pInicial);
@@ -26,7 +26,7 @@ public class Main {
             // ========================================================================
             // USO DE FIND
             // ========================================================================
-            System.out.println("\n--- 3. FIND: Recuperando producto ---");
+            System.out.println("\n--- FIND: Recuperando producto ---");
             em.getTransaction().begin();
 
             Producto p = em.find(Producto.class, idProducto);
@@ -37,19 +37,19 @@ public class Main {
             // ========================================================================
             // MODIFICACIÓN ESTANDO MANAGED
             // ========================================================================
-            System.out.println("\n--- 4. MODIFICACIÓN MANAGED (Sin merge) ---");
+            System.out.println("\n--- MODIFICACIÓN MANAGED (Sin merge) ---");
 
             p.setPrecio(450.00);
             System.out.println("Valor en memoria cambiado a: " + p.getPrecio());
 
             em.getTransaction().commit();
-            System.out.println("Commit realizado. Revisa tu BBDD, el precio debe ser 450.00");
+            System.out.println("Commit realizado. Revisa la BBDD, el precio debe ser 450.00");
 
 
             // ========================================================================
             // DETACH y MERGE
             // ========================================================================
-            System.out.println("\n--- 5. DETACH y MERGE ---");
+            System.out.println("\n--- DETACH y MERGE ---");
             em.getTransaction().begin();
 
             em.detach(p);
@@ -70,16 +70,16 @@ public class Main {
             // ========================================================================
             // REMOVE
             // ========================================================================
-            System.out.println("\n--- 6. REMOVE ---");
+            System.out.println("\n--- REMOVE ---");
             em.getTransaction().begin();
 
             em.remove(p);
 
             em.getTransaction().commit();
-            System.out.println("Producto eliminado. Si intentas buscarlo dará null.");
+            System.out.println("Producto eliminado. Si intentas buscarlo sera null.");
 
             Producto pBorrado = em.find(Producto.class, idProducto);
-            System.out.println("Búsqueda post-delete: " + pBorrado);
+            System.out.println("Busqueda post-delete: " + pBorrado);
 
         } catch (Exception e) {
             if (em.getTransaction().isActive()) em.getTransaction().rollback();
