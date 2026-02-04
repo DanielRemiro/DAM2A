@@ -52,10 +52,8 @@ public class LibreriaService {
 
             Editorial ed = editorialRepository.findById(em, idEditorial);
             if(ed != null) {
-                // Helper bidireccional
                 ed.addLibro(libro);
 
-                // Merge actualiza la editorial y, por cascade, inserta el libro
                 editorialRepository.merge(em, ed);
                 System.out.println(">> Libro añadido correctamente a " + ed.getNombre());
             } else {
@@ -71,8 +69,6 @@ public class LibreriaService {
         }
     }
 
-    // 3. BuscarLibro (Para simplificar, lo busco a través de la editorial o directo con EM)
-    // Nota: Normalmente tendríamos un LibroRepository, aquí uso EM directo para variar o instanciaría el repo.
     public Libro buscarLibro(Long idLibro) {
         EntityManager em = JPAUtil.getEntityManager();
         Libro libro = null;
@@ -84,16 +80,14 @@ public class LibreriaService {
         return libro;
     }
 
-    // 4. ListaLibrosEditorial
     public List<Libro> listaLibrosEditorial(Long idEditorial) {
         EntityManager em = JPAUtil.getEntityManager();
         List<Libro> libros = null;
         try {
             Editorial ed = editorialRepository.findById(em, idEditorial);
             if(ed != null) {
-                // IMPORTANTE: Acceder a la lista dentro de la sesión para inicializar el LAZY
                 libros = ed.getLibros();
-                libros.size(); // Truco para forzar la carga de datos
+                libros.size();
             }
         } finally {
             em.close();

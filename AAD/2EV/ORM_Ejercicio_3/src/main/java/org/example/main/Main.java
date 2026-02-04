@@ -20,7 +20,7 @@ public class Main {
         Libro nuevoLibro = new Libro("El Señor de los Anillos", "999-000", 25.50);
         service.addLibro(idEditorial, nuevoLibro);
 
-        System.out.println("\n=== 4. LISTAR TRAS INSERCIÓN ===");
+        System.out.println("\n=== 4. LISTAR DESPUES DE AÑADIR ===");
         imprimirLibros(service, idEditorial);
 
         JPAUtil.shutdown();
